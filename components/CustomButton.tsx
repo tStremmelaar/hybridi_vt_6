@@ -23,10 +23,12 @@ export default function CustomButton(props: buttonProps) {
 
 const styles = StyleSheet.create({
   button: {
+    alignSelf: 'center',
     marginTop: 10,
     padding: 8,
     borderRadius: 15,
     color: '#fff',
+    textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
   },

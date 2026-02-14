@@ -19,7 +19,7 @@ export default function Camera() {
         <View style={styles.askContainer}>
           <Text style={styles.ask}>Need camera permission to scan barcodes</Text>
           <CustomButton
-            text="Grant camera access"
+            text="Grant permission"
             handlePress={() => requestPermission}
           />
         </View>
@@ -37,9 +37,9 @@ export default function Camera() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'flex-end',
   },
   askContainer: {
-    alignSelf: 'flex-end',
     marginBottom: 50,
     marginLeft: 10,
     marginRight: 10,
