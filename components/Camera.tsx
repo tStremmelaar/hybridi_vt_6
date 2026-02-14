@@ -1,11 +1,11 @@
-import { useCameraPermissions } from "expo-camera"
+import { CameraView, useCameraPermissions } from "expo-camera"
 import { useState } from "react"
 import { Pressable, StyleSheet, Text, View } from "react-native"
+import CustomButton from "./CustomButton"
 
 export default function Camera() {
   const facing = 'back'
   const [permission, requestPermission] = useCameraPermissions()
-  const [buttonIn, setButtonIn] = useState(false)
 
   if (!permission) {
     // while permissions loading
@@ -18,22 +18,18 @@ export default function Camera() {
       <View style={styles.container}>
         <View style={styles.askContainer}>
           <Text style={styles.ask}>Need camera permission to scan barcodes</Text>
-          <Pressable
-            onPressIn={() => setButtonIn(true)}
-            onPressOut={() => setButtonIn(false)}
-          >
-            <Text style={[styles.button, {backgroundColor: buttonIn ? '#002D4D' : '#004A80'}]}>
-              Grant camera access
-            </Text>
-          </Pressable>
+          <CustomButton
+            text="Grant camera access"
+            handlePress={() => requestPermission}
+          />
         </View>
       </View>
     )
   }
 
   return (
-    <View>
-      <Text>Access granted</Text>
+    <View style={styles.container}>
+      <CameraView style={styles.camera} facing={facing} />
     </View>
   )
 }
@@ -41,10 +37,9 @@ export default function Camera() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
   },
   askContainer: {
+    alignSelf: 'flex-end',
     marginBottom: 50,
     marginLeft: 10,
     marginRight: 10,
@@ -57,12 +52,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
   },
-  button: {
-    marginTop: 10,
-    padding: 8,
-    borderRadius: 15,
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
+  camera: {
+    flex: 1,
+  }
 })
